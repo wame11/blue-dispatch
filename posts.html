@@ -100,20 +100,13 @@
         const posts = await res.json();
         if (!Array.isArray(posts)) throw new Error("Invalid JSON");
 
+        // We still sort by date to keep the correct order, even though we won't display it
         posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
         postsList.innerHTML = posts.map(p => {
-          // Format date: e.g. "14 Jan 2026"
-          const dateStr = new Date(p.date).toLocaleDateString('en-GB', { 
-            day: 'numeric', 
-            month: 'short', 
-            year: 'numeric' 
-          });
-
           return `
             <a href="posts/${p.file}"
                class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:bg-slate-50 transition block">
-              <div class="text-sm font-semibold text-slate-500 mb-1">${dateStr}</div>
               <div class="text-xl font-extrabold text-[#06142b]">${p.title}</div>
               <div class="mt-2 text-slate-600">${p.excerpt || ""}</div>
             </a>
