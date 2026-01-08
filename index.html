@@ -10,13 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    html { scroll-behavior: smooth; }
+    html{ scroll-behavior: smooth; }
   </style>
 </head>
 
@@ -97,9 +97,9 @@
         <!-- ✅ Auto-filled from posts/posts.json -->
         <div id="latestGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
-        <!-- If JSON fails -->
+        <!-- fallback -->
         <div id="latestError" class="hidden mt-6 bg-white border border-slate-200 rounded-xl p-5 text-slate-600">
-          Posts failed to load. Check that <span class="font-semibold">posts/posts.json</span> exists and is valid JSON.
+          Latest posts failed to load. Check <span class="font-semibold">posts/posts.json</span> is committed and valid.
         </div>
       </div>
     </section>
@@ -129,16 +129,19 @@
 
   <script src="assets/site.js"></script>
 
-  <!-- ✅ Posts JSON loader (latest 2) -->
+  <!-- ✅ Latest posts loader (UTC dates) -->
   <script>
     (async function () {
       const latestGrid = document.getElementById("latestGrid");
       const latestError = document.getElementById("latestError");
 
-      function fmtDateLong(iso) {
-        const d = new Date(iso + "T00:00:00Z");
-        return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-      }
+      // ✅ Force UTC so dates never shift a day
+      const fmtLongUTC = new Intl.DateTimeFormat("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC"
+      });
 
       try {
         const res = await fetch("posts/posts.json", { cache: "no-store" });
@@ -147,15 +150,16 @@
         const posts = await res.json();
         if (!Array.isArray(posts)) throw new Error("posts.json is not an array");
 
-        // sort newest first
         posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
         const latestTwo = posts.slice(0, 2);
 
         latestGrid.innerHTML = latestTwo.map((p, idx) => {
-          const dateText = fmtDateLong(p.date);
+          const d = new Date((p.date || "") + "T00:00:00Z");
+          const dateText = fmtLongUTC.format(d);
           const href = "posts/" + p.file;
-          const primary = idx === 0; // newest button style
+          const primary = idx === 0;
+
           return `
             <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
               <div class="text-sm font-semibold text-slate-500">${dateText}</div>
@@ -172,6 +176,15 @@
             </article>
           `;
         }).join("");
+
+        // If there are no posts, show a friendly message
+        if (latestTwo.length === 0) {
+          latestGrid.innerHTML = `
+            <div class="bg-white border border-slate-200 rounded-xl p-6 text-slate-600">
+              No posts yet. Add your first post file and list it in <span class="font-semibold">posts/posts.json</span>.
+            </div>
+          `;
+        }
       } catch (e) {
         console.error(e);
         latestError.classList.remove("hidden");
