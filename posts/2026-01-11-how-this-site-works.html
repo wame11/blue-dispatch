@@ -1,66 +1,134 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How The Blue Dispatch Works · The Blue Dispatch</title>
-  <link rel="stylesheet" href="../assets/styles.css" />
+  <meta name="description" content="How The Blue Dispatch runs, how posts are added, and how to support it." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-<body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="../index.html">
-      <div class="brand-title">The Blue Dispatch</div>
-      <div class="brand-tagline">Fast, clear, centre-right commentary.</div>
-    </a>
-    <nav class="nav">
-      <a class="nav-link" href="../index.html">Home</a>
-      <a class="nav-link active" href="../posts.html">Posts</a>
-      <a class="nav-link" href="../about.html">About</a>
-      <a class="nav-link nav-cta" href="../donate.html">Donate</a>
+
+<body class="bg-white text-[#06142b]">
+  <!-- HEADER -->
+  <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../index.html" class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">
+          The Blue Dispatch
+        </a>
+
+        <div class="hidden md:block">
+          <div class="flex items-baseline space-x-2">
+            <a href="../index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
+            <a href="../posts.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Posts</a>
+            <a href="../about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="../donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
+          </div>
+        </div>
+
+        <div class="-mr-2 flex md:hidden">
+          <button type="button" id="mobile-menu-button"
+            class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </nav>
-  </div>
-</header>
 
-<main class="wrap prose">
-  <h1>How The Blue Dispatch Works</h1>
-  <div class="meta">Published 11 January 2026</div>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="max-w-6xl mx-auto px-4 pb-4">
+        <div class="pt-2 space-y-1">
+          <a href="../index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
+          <a href="../posts.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Posts</a>
+          <a href="../about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+          <a href="../donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <p><strong>Thesis:</strong> Politics improves when arguments are clear, structured, and honest about trade-offs.</p>
+  <!-- MAIN -->
+  <main class="bg-white">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
+      <div class="text-sm font-semibold text-slate-500">11 January 2026</div>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight">
+        How The Blue Dispatch Works
+      </h1>
 
-  <h2>What this site is</h2>
-  <ul>
-    <li>A student-run UK politics and policy blog</li>
-    <li>Short, practical dispatches</li>
-    <li>Independent writing</li>
-  </ul>
+      <p class="mt-6 text-slate-700 text-base sm:text-lg">
+        This is the simple operating system behind the site: how posts are written, how they’re published, and how support works.
+      </p>
 
-  <h2>Posting schedule</h2>
-  <p>A new post roughly every three days.</p>
+      <div class="mt-8 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <div class="font-extrabold">Thesis</div>
+        <p class="mt-2 text-slate-700">
+          Politics improves when arguments are clear, structured, and honest about trade-offs — and this site is designed to do that.
+        </p>
+      </div>
 
-  <h2>Support</h2>
-  <p>Optional donations support hosting, books, and research.</p>
+      <h2 class="mt-10 text-xl sm:text-2xl font-extrabold">1) The format</h2>
+      <p class="mt-3 text-slate-700">
+        Each dispatch is short and consistent: one thesis, a few supporting points, and a takeaway. It’s meant to be readable in a few minutes.
+      </p>
 
-  <div class="donate-box">
-    <a class="btn" href="https://revolut.me/ethanhuil" target="_blank">Donate on Revolut →</a>
-  </div>
+      <h2 class="mt-8 text-xl sm:text-2xl font-extrabold">2) How publishing works (GitHub)</h2>
+      <p class="mt-3 text-slate-700">
+        This site is hosted on GitHub Pages. Every post is its own HTML file in the <span class="font-semibold">/posts</span> folder.
+        When you commit a new file, it goes live automatically.
+      </p>
 
-  <h2>Contact</h2>
-  <p class="muted">
-    Please contact
-    <a href="mailto:ethansamuelross@icloud.com">ethansamuelross@icloud.com</a>
-    for inquiries.
-  </p>
+      <h2 class="mt-8 text-xl sm:text-2xl font-extrabold">3) Frequency</h2>
+      <p class="mt-3 text-slate-700">
+        The aim is consistency: a steady flow of sensible writing beats one huge essay and silence.
+      </p>
 
-  <p><a class="btn btn-ghost" href="../posts.html">← Back to Posts</a></p>
-</main>
+      <h2 class="mt-8 text-xl sm:text-2xl font-extrabold">4) Support</h2>
+      <p class="mt-3 text-slate-700">
+        Donations are optional. If someone wants to support hosting and research materials, they can do so via Revolut.
+      </p>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div class="muted">© <span id="y"></span> The Blue Dispatch</div>
-  </div>
-</footer>
+      <div class="mt-6 bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <div class="text-sm font-semibold text-slate-500">Revolut</div>
+        <a href="https://revolut.me/ethanhuil" target="_blank" rel="noopener"
+           class="mt-2 inline-flex items-center justify-center rounded-lg bg-[#06142b] px-5 py-2.5 text-white font-semibold hover:opacity-90">
+          Donate on Revolut →
+        </a>
+      </div>
 
-<script src="../assets/site.js"></script>
+      <h2 class="mt-10 text-xl sm:text-2xl font-extrabold">Contact</h2>
+      <p class="mt-3 text-slate-700">
+        Please contact
+        <a href="mailto:ethansamuelross@icloud.com" class="font-semibold text-[#06142b] hover:underline">ethansamuelross@icloud.com</a>
+        for inquiries.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-3">
+        <a href="../posts.html" class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-5 py-2.5 font-semibold hover:bg-slate-50">
+          ← Back to Posts
+        </a>
+        <a href="../donate.html" class="inline-flex items-center justify-center rounded-lg bg-[#06142b] px-5 py-2.5 font-semibold text-white hover:opacity-90">
+          Donate
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+      <p>© <span data-year></span> The Blue Dispatch</p>
+    </div>
+  </footer>
+
+  <script src="../assets/site.js"></script>
 </body>
 </html>
