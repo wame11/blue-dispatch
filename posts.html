@@ -62,7 +62,7 @@
       <div class="text-center">
         <h1 class="text-3xl sm:text-4xl font-extrabold">All Posts</h1>
         <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
-          Every dispatch stays here automatically. Add a post file + add it to posts/posts.json.
+          Every dispatch stays here automatically. Add a post file, then list it in <span class="font-semibold">posts/posts.json</span>.
         </p>
       </div>
 
@@ -99,10 +99,13 @@
       const postsList = document.getElementById("postsList");
       const postsError = document.getElementById("postsError");
 
-      function fmtDateShort(iso) {
-        const d = new Date(iso + "T00:00:00Z");
-        return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-      }
+      // ✅ Force UTC so dates never shift a day on any device
+      const fmtShortUTC = new Intl.DateTimeFormat("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC"
+      });
 
       try {
         const res = await fetch("posts/posts.json", { cache: "no-store" });
@@ -115,10 +118,11 @@
 
         postsList.innerHTML = posts.map(p => {
           const href = "posts/" + p.file;
+          const d = new Date(p.date + "T00:00:00Z"); // midnight UTC
           return `
             <a href="${href}"
                class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 hover:bg-slate-50 transition">
-              <div class="text-sm font-semibold text-slate-500">${fmtDateShort(p.date)}</div>
+              <div class="text-sm font-semibold text-slate-500">${fmtShortUTC.format(d)}</div>
               <div class="mt-2 text-xl font-extrabold">${p.title}</div>
               <div class="mt-1 text-slate-600">${p.excerpt || ""}</div>
             </a>
