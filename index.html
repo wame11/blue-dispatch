@@ -1,84 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Blue Dispatch</title>
-  <meta name="description" content="Fast, clear, centre-right commentary." />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <meta name="description" content="The Blue Dispatch — fast, clear, centre-right commentary." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-<body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="index.html">
-      <div class="brand-title">The Blue Dispatch</div>
-      <div class="brand-tagline">Fast, clear, centre-right commentary.</div>
-    </a>
-    <nav class="nav">
-      <a class="nav-link active" href="index.html">Home</a>
-      <a class="nav-link" href="posts.html">Posts</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link nav-cta" href="donate.html">Donate</a>
+
+<body class="bg-white text-[#06142b]">
+  <!-- HEADER -->
+  <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">The Blue Dispatch</span>
+        </a>
+
+        <div class="hidden md:block">
+          <div class="flex items-baseline space-x-2">
+            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Home</a>
+            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
+            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">
+              Donate
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="-mr-2 flex md:hidden">
+          <button type="button" id="mobile-menu-button"
+                  class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </nav>
-  </div>
-</header>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>Latest Dispatches</h1>
-    <p class="muted">The two most recent posts. Older ones stay permanently on the Posts page.</p>
-  </section>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="max-w-6xl mx-auto px-4 pb-4">
+        <div class="pt-2 space-y-1">
+          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Home</a>
+          <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
+          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+          <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <section class="grid">
-    <article class="card">
-      <div class="meta">11 January 2026</div>
-      <h2 class="card-title">
-        <a href="posts/2026-01-11-how-this-site-works.html">How The Blue Dispatch Works</a>
-      </h2>
-      <p class="card-excerpt">
-        Format, posting schedule, how the site runs on GitHub, and how to support it.
+  <main>
+    <!-- HERO -->
+    <section class="bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+          What The Blue Dispatch is
+          <span class="block mt-2 text-lg sm:text-xl font-semibold text-slate-600">
+            (fast, clear, centre-right commentary)
+          </span>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto">
+          Short, structured dispatches on UK policy and politics — focused on outcomes, trade-offs, and practical ideas.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="posts.html" class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-white px-6 py-3 font-semibold hover:opacity-90">
+            Read all posts →
+          </a>
+          <a href="donate.html" class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3 font-semibold text-[#06142b] hover:bg-slate-50">
+            Support the Dispatch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LATEST 2 -->
+    <section class="bg-slate-50 py-12 sm:py-14 border-t border-slate-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold">Latest posts</h2>
+            <p class="mt-2 text-slate-600">The newest two dispatches. Everything else lives on the Posts page.</p>
+          </div>
+          <a href="posts.html" class="hidden sm:inline text-sm font-semibold text-[#06142b] hover:underline">View all →</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Newest -->
+          <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
+            <div class="text-sm font-semibold text-slate-500">11 January 2026</div>
+            <h3 class="mt-3 text-2xl font-extrabold leading-snug">
+              <a class="hover:underline" href="posts/2026-01-11-how-this-site-works.html">How The Blue Dispatch Works</a>
+            </h3>
+            <p class="mt-3 text-slate-600 flex-grow">
+              Format, posting rhythm, GitHub setup logic, and how support works.
+            </p>
+            <div class="mt-5">
+              <a class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-white px-4 py-2 font-semibold hover:opacity-90"
+                 href="posts/2026-01-11-how-this-site-works.html">
+                Read →
+              </a>
+            </div>
+          </article>
+
+          <!-- Second newest -->
+          <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
+            <div class="text-sm font-semibold text-slate-500">8 January 2026</div>
+            <h3 class="mt-3 text-2xl font-extrabold leading-snug">
+              <a class="hover:underline" href="posts/2026-01-08-welcome.html">Welcome to The Blue Dispatch</a>
+            </h3>
+            <p class="mt-3 text-slate-600 flex-grow">
+              What this site is, what it isn’t, and how dispatches will be written.
+            </p>
+            <div class="mt-5">
+              <a class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 font-semibold text-[#06142b] hover:bg-slate-50"
+                 href="posts/2026-01-08-welcome.html">
+                Read →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="bg-white py-12 sm:py-14 border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
+        <p class="mt-4 text-slate-600 text-base sm:text-lg">
+          Please contact
+          <a href="mailto:ethansamuelross@icloud.com" class="font-semibold text-[#06142b] hover:underline">ethansamuelross@icloud.com</a>
+          for inquiries.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+      <p>© <span data-year></span> The Blue Dispatch</p>
+      <p class="mt-2 text-sm">
+        <a class="hover:underline" href="mailto:ethansamuelross@icloud.com">ethansamuelross@icloud.com</a>
       </p>
-      <a class="btn btn-ghost" href="posts/2026-01-11-how-this-site-works.html">Read →</a>
-    </article>
+    </div>
+  </footer>
 
-    <article class="card">
-      <div class="meta">8 January 2026</div>
-      <h2 class="card-title">
-        <a href="posts/2026-01-08-welcome.html">Welcome to The Blue Dispatch</a>
-      </h2>
-      <p class="card-excerpt">
-        What this site is, what it isn’t, and how the Dispatch will run.
-      </p>
-      <a class="btn btn-ghost" href="posts/2026-01-08-welcome.html">Read →</a>
-    </article>
-  </section>
-
-  <section class="panel">
-    <h3>What you’ll find here</h3>
-    <ul class="bullets">
-      <li>Economy, public services, policing, and education</li>
-      <li>Clear trade-offs: what it costs, what it saves, what it changes</li>
-      <li>A calm tone (because shouting isn’t policy)</li>
-    </ul>
-  </section>
-
-  <section class="panel">
-    <h3>Contact</h3>
-    <p class="muted">
-      Please contact
-      <a href="mailto:ethansamuelross@icloud.com">ethansamuelross@icloud.com</a>
-      for inquiries.
-    </p>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div class="muted">© <span id="y"></span> The Blue Dispatch</div>
-    <div class="muted">Views are personal • Not official party statements</div>
-  </div>
-</footer>
-
-<script src="assets/site.js"></script>
+  <script src="assets/site.js"></script>
 </body>
 </html>
