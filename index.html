@@ -8,82 +8,77 @@
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="index.html">
-        <div class="brand-title">The Blue Dispatch</div>
-        <div class="brand-tagline">Fast, clear, centre-right commentary.</div>
-      </a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-title">The Blue Dispatch</div>
+      <div class="brand-tagline">Fast, clear, centre-right commentary.</div>
+    </a>
+    <nav class="nav">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="posts.html">Posts</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link nav-cta" href="donate.html">Donate</a>
+    </nav>
+  </div>
+</header>
 
-      <nav class="nav">
-        <a class="nav-link active" href="index.html">Home</a>
-        <a class="nav-link" href="posts.html">Posts</a>
-        <a class="nav-link" href="about.html">About</a>
-        <a class="nav-link nav-cta" href="donate.html">Donate</a>
-      </nav>
-    </div>
-  </header>
+<main class="wrap">
+  <section class="hero">
+    <h1>Latest Dispatches</h1>
+    <p class="muted">The two most recent posts. Older ones stay permanently on the Posts page.</p>
+  </section>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>Latest Dispatches</h1>
-      <p class="muted">
-        The two newest posts are shown here. Older posts stay available on the Posts page.
+  <section class="grid">
+    <article class="card">
+      <div class="meta">11 January 2026</div>
+      <h2 class="card-title">
+        <a href="posts/2026-01-11-how-this-site-works.html">How The Blue Dispatch Works</a>
+      </h2>
+      <p class="card-excerpt">
+        Format, posting schedule, how the site runs on GitHub, and how to support it.
       </p>
-    </section>
+      <a class="btn btn-ghost" href="posts/2026-01-11-how-this-site-works.html">Read →</a>
+    </article>
 
-    <!-- ✅ ONLY THE NEWEST TWO POSTS GO HERE -->
-    <section class="grid">
-      <article class="card">
-        <div class="meta">8 January 2026</div>
-        <h2 class="card-title">
-          <a href="posts/2026-01-08-welcome.html">Welcome to The Blue Dispatch</a>
-        </h2>
-        <p class="card-excerpt">
-          What this site is, what it isn’t, and how the Dispatch will run.
-        </p>
-        <a class="btn btn-ghost" href="posts/2026-01-08-welcome.html">Read →</a>
-      </article>
-
-      <!-- Replace this second card with your most recent post -->
-      <article class="card">
-        <div class="meta">11 January 2026</div>
-        <h2 class="card-title">
-          <a href="posts/2026-01-11-your-title.html">Your second latest post title</a>
-        </h2>
-        <p class="card-excerpt">
-          Short excerpt for the second latest post.
-        </p>
-        <a class="btn btn-ghost" href="posts/2026-01-11-your-title.html">Read →</a>
-      </article>
-    </section>
-
-    <section class="panel">
-      <h3>What you’ll find here</h3>
-      <ul class="bullets">
-        <li>Economy, public services, policing, and education</li>
-        <li>Clear trade-offs: what it costs, what it saves, what it changes</li>
-        <li>A calm tone (because shouting isn’t policy)</li>
-      </ul>
-    </section>
-
-    <section class="panel">
-      <h3>Contact</h3>
-      <p class="muted">
-        Please contact
-        <a href="mailto:ethansamuelross@icloud.com">ethansamuelross@icloud.com</a>
-        for inquiries.
+    <article class="card">
+      <div class="meta">8 January 2026</div>
+      <h2 class="card-title">
+        <a href="posts/2026-01-08-welcome.html">Welcome to The Blue Dispatch</a>
+      </h2>
+      <p class="card-excerpt">
+        What this site is, what it isn’t, and how the Dispatch will run.
       </p>
-    </section>
-  </main>
+      <a class="btn btn-ghost" href="posts/2026-01-08-welcome.html">Read →</a>
+    </article>
+  </section>
 
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <div class="muted">© <span id="y"></span> The Blue Dispatch</div>
-      <div class="muted">Views are personal • Not official party statements</div>
-    </div>
-  </footer>
+  <section class="panel">
+    <h3>What you’ll find here</h3>
+    <ul class="bullets">
+      <li>Economy, public services, policing, and education</li>
+      <li>Clear trade-offs: what it costs, what it saves, what it changes</li>
+      <li>A calm tone (because shouting isn’t policy)</li>
+    </ul>
+  </section>
 
-  <script src="assets/site.js"></script>
+  <section class="panel">
+    <h3>Contact</h3>
+    <p class="muted">
+      Please contact
+      <a href="mailto:ethansamuelross@icloud.com">ethansamuelross@icloud.com</a>
+      for inquiries.
+    </p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="muted">© <span id="y"></span> The Blue Dispatch</div>
+    <div class="muted">Views are personal • Not official party statements</div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
