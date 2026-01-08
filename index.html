@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Blue Dispatch</title>
   <meta name="description" content="Fast, clear, centre-right commentary." />
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -29,13 +27,13 @@
         <div class="hidden md:block">
           <div class="flex items-baseline space-x-2">
             <a href="index.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Home</a>
-            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
-            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
-            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
+            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-[#06142b] hover:text-[#06142b] hover:bg-slate-100">Posts</a>
+            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-[#06142b] hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-[#06142b] hover:opacity-90">Donate</a>
           </div>
         </div>
         <div class="-mr-2 flex md:hidden">
-          <button type="button" id="mobile-menu-button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
+          <button type="button" id="mobile-menu-button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-[#06142b] hover:text-[#06142b] hover:bg-slate-200">
             <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
@@ -47,46 +45,42 @@
       <div class="max-w-6xl mx-auto px-4 pb-4">
         <div class="pt-2 space-y-1">
           <a href="index.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Home</a>
-          <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
-          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
-          <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
+          <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-medium text-[#06142b] hover:text-[#06142b] hover:bg-slate-100">Posts</a>
+          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-[#06142b] hover:text-[#06142b] hover:bg-slate-100">About</a>
+          <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-[#06142b] text-center hover:opacity-90">Donate</a>
         </div>
       </div>
     </div>
   </header>
-
   <main>
     <section class="bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">Fast, clear, centre-right commentary</h1>
-        <p class="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">Short, structured dispatches on UK policy and politics — focused on outcomes, trade-offs, and practical ideas.</p>
+        <p class="mt-6 text-base sm:text-lg text-[#06142b] max-w-3xl mx-auto leading-relaxed">Short, structured dispatches on UK policy and politics — focused on outcomes, trade-offs, and practical ideas.</p>
         <div class="mt-8">
-          <a href="posts.html" class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-white px-6 py-3 font-semibold hover:opacity-90">Read all posts →</a>
+          <a href="posts.html" class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-[#06142b] px-6 py-3 font-semibold hover:opacity-90">Read all posts →</a>
         </div>
       </div>
     </section>
-
     <section class="bg-slate-50 py-12 sm:py-14 border-t border-slate-200">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-end justify-between gap-4 mb-8">
           <div>
             <h2 class="text-2xl sm:text-3xl font-extrabold">Latest posts</h2>
-            <p class="mt-2 text-slate-600">The newest two dispatches.</p>
+            <p class="mt-2 text-[#06142b]">The newest two dispatches.</p>
           </div>
           <a href="posts.html" class="hidden sm:inline text-sm font-semibold text-[#06142b] hover:underline">View all →</a>
         </div>
         <div id="latestGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        <div id="latestError" class="hidden mt-6 bg-white border border-slate-200 rounded-xl p-5 text-slate-600">Latest posts failed to load.</div>
+        <div id="latestError" class="hidden mt-6 bg-white border border-slate-200 rounded-xl p-5 text-[#06142b]">Latest posts failed to load.</div>
       </div>
     </section>
   </main>
-
   <footer class="bg-white border-t border-slate-200 py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#06142b]">
       <p>© <span data-year></span> The Blue Dispatch</p>
     </div>
   </footer>
-
   <script src="assets/site.js"></script>
   <script>
     (async function () {
@@ -101,9 +95,9 @@
             <h3 class="text-2xl font-extrabold leading-snug">
               <a class="hover:underline" href="posts/${p.file}">${p.title}</a>
             </h3>
-            <p class="mt-3 text-slate-600 flex-grow leading-relaxed">${p.excerpt || ""}</p>
+            <p class="mt-3 text-[#06142b] flex-grow leading-relaxed">${p.excerpt || ""}</p>
             <div class="mt-5">
-              <a class="inline-flex items-center justify-center rounded-lg ${idx === 0 ? "bg-[#06142b] text-white" : "border border-slate-200 text-[#06142b]"} px-4 py-2 font-semibold" href="posts/${p.file}">Read →</a>
+              <a class="inline-flex items-center justify-center rounded-lg ${idx === 0 ? "bg-[#06142b] text-[#06142b]" : "border border-slate-200 text-[#06142b]"} px-4 py-2 font-semibold" href="posts/${p.file}">Read →</a>
             </div>
           </article>
         `).join("");
