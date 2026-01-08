@@ -18,7 +18,6 @@
       </div>
       <div class="donate-pop-text">Small tip, big impact.</div>
       <a class="donate-pop-btn" href="https://revolut.me/ethanhuil" target="_blank" rel="noopener">Donate →</a>
-      <a class="donate-pop-link" href="${location.pathname.includes('posts/') ? '../donate.html' : 'donate.html'}">Donate page</a>
     </div>
   `;
 
