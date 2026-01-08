@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body{
+    body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -21,38 +21,18 @@
   <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <a href="index.html" class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">The Blue Dispatch</a>
+        <a href="index.html" class="text-xl sm:text-2xl font-extrabold tracking-tight">The Blue Dispatch</a>
 
         <div class="hidden md:block">
           <div class="flex items-baseline space-x-2">
-            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
-            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Posts</a>
-            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100">Home</a>
+            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-semibold bg-slate-100">Posts</a>
+            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100">About</a>
             <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
           </div>
         </div>
-
-        <div class="-mr-2 flex md:hidden">
-          <button type="button" id="mobile-menu-button"
-                  class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
-            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
       </div>
     </nav>
-
-    <div class="md:hidden hidden" id="mobile-menu">
-      <div class="max-w-6xl mx-auto px-4 pb-4">
-        <div class="pt-2 space-y-1">
-          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
-          <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Posts</a>
-          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
-          <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <main class="bg-slate-50">
@@ -63,25 +43,14 @@
 
       <div id="postsList" class="mt-12 grid grid-cols-1 gap-4"></div>
 
-      <div id="postsError" class="hidden mt-8 bg-white border border-slate-200 rounded-xl p-5 text-slate-600">
+      <div id="postsError" class="hidden mt-8 bg-white border border-slate-200 rounded-xl p-5 opacity-70">
         Posts failed to load.
-      </div>
-    </section>
-
-    <section class="bg-white border-t border-slate-200">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
-        <p class="mt-4 text-slate-600 text-base sm:text-lg">
-          Please contact
-          <a href="mailto:ethansamuelross@icloud.com" class="font-semibold text-[#06142b] hover:underline">ethansamuelross@icloud.com</a>
-          for inquiries.
-        </p>
       </div>
     </section>
   </main>
 
   <footer class="bg-white border-t border-slate-200 py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center opacity-70">
       <p>© <span data-year></span> The Blue Dispatch</p>
     </div>
   </footer>
@@ -100,15 +69,15 @@
         const posts = await res.json();
         if (!Array.isArray(posts)) throw new Error("Invalid JSON");
 
-        // We still sort by date to keep the correct order, even though we won't display it
+        // Sorting by date in the background to keep the order correct
         posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
         postsList.innerHTML = posts.map(p => {
           return `
             <a href="posts/${p.file}"
                class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:bg-slate-50 transition block">
-              <div class="text-xl font-extrabold text-[#06142b]">${p.title}</div>
-              <div class="mt-2 text-slate-600">${p.excerpt || ""}</div>
+              <div class="text-xl font-extrabold">${p.title}</div>
+              <div class="mt-2 opacity-90">${p.excerpt || ""}</div>
             </a>
           `;
         }).join("");
