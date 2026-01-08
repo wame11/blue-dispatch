@@ -19,9 +19,7 @@
     html { scroll-behavior: smooth; }
   </style>
 </head>
-
 <body class="bg-white text-[#06142b]">
-  <!-- HEADER -->
   <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
@@ -38,7 +36,6 @@
           </div>
         </div>
 
-        <!-- Mobile -->
         <div class="-mr-2 flex md:hidden">
           <button type="button" id="mobile-menu-button"
                   class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
@@ -63,7 +60,6 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
@@ -83,7 +79,6 @@
       </div>
     </section>
 
-    <!-- LATEST 2 -->
     <section class="bg-slate-50 py-12 sm:py-14 border-t border-slate-200">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-end justify-between gap-4 mb-8">
@@ -94,17 +89,14 @@
           <a href="posts.html" class="hidden sm:inline text-sm font-semibold text-[#06142b] hover:underline">View all →</a>
         </div>
 
-        <!-- ✅ Auto-filled from posts/posts.json (NO DATES) -->
         <div id="latestGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
-        <!-- fallback -->
         <div id="latestError" class="hidden mt-6 bg-white border border-slate-200 rounded-xl p-5 text-slate-600">
           Latest posts failed to load.
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="bg-white py-12 sm:py-14 border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
@@ -117,7 +109,6 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="bg-white border-t border-slate-200 py-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
       <p>© <span data-year></span> The Blue Dispatch</p>
@@ -129,7 +120,6 @@
 
   <script src="assets/site.js"></script>
 
-  <!-- ✅ Latest posts loader (NO DATES) -->
   <script>
     (async function () {
       const latestGrid = document.getElementById("latestGrid");
@@ -142,9 +132,7 @@
         const posts = await res.json();
         if (!Array.isArray(posts)) throw new Error("Invalid JSON");
 
-        // newest first
         posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
         const latestTwo = posts.slice(0, 2);
 
         if (latestTwo.length === 0) {
@@ -159,9 +147,17 @@
         latestGrid.innerHTML = latestTwo.map((p, idx) => {
           const href = "posts/" + p.file;
           const primary = idx === 0;
+          
+          // Format date: e.g. "14 Jan 2026"
+          const dateStr = new Date(p.date).toLocaleDateString('en-GB', { 
+            day: 'numeric', 
+            month: 'short', 
+            year: 'numeric' 
+          });
 
           return `
             <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
+              <div class="text-sm font-bold text-slate-500 mb-2">${dateStr}</div>
               <h3 class="text-2xl font-extrabold leading-snug">
                 <a class="hover:underline" href="${href}">${p.title}</a>
               </h3>
