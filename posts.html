@@ -4,34 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Posts · The Blue Dispatch</title>
-
+  <meta name="description" content="All posts from The Blue Dispatch." />
+ 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+ 
   <style>
-    body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
   </style>
 </head>
+ 
 <body class="bg-white text-[#06142b]">
   <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <a href="index.html" class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">The Blue Dispatch</a>
-
+ 
         <div class="hidden md:block">
           <div class="flex items-baseline space-x-2">
             <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
             <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Posts</a>
             <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="live.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">OSINT Live</a>
             <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
           </div>
         </div>
-
+ 
         <div class="-mr-2 flex md:hidden">
           <button type="button" id="mobile-menu-button"
                   class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
@@ -42,82 +40,64 @@
         </div>
       </div>
     </nav>
-
+ 
     <div class="md:hidden hidden" id="mobile-menu">
       <div class="max-w-6xl mx-auto px-4 pb-4">
         <div class="pt-2 space-y-1">
           <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
           <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Posts</a>
           <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+          <a href="live.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">OSINT Live</a>
           <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
         </div>
       </div>
     </div>
   </header>
-
+ 
   <main class="bg-slate-50">
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
       <div class="text-center">
         <h1 class="text-3xl sm:text-4xl font-extrabold">All Posts</h1>
+        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
+          Every dispatch stays here permanently unless you remove the post file.
+        </p>
       </div>
-
-      <div id="postsList" class="mt-12 grid grid-cols-1 gap-4"></div>
-
-      <div id="postsError" class="hidden mt-8 bg-white border border-slate-200 rounded-xl p-5 text-slate-600">
-        Posts failed to load.
+ 
+      <div class="mt-10 grid grid-cols-1 gap-4">
+        <a href="posts/2026-01-11-how-this-site-works.html"
+           class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 hover:bg-slate-50 transition">
+          <div class="text-sm font-semibold text-slate-500">11 Jan 2026</div>
+          <div class="mt-2 text-xl font-extrabold">How The Blue Dispatch Works</div>
+          <div class="mt-1 text-slate-600">Format, posting rhythm, GitHub setup logic, and support.</div>
+        </a>
+ 
+        <a href="posts/2026-01-08-welcome.html"
+           class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 hover:bg-slate-50 transition">
+          <div class="text-sm font-semibold text-slate-500">8 Jan 2026</div>
+          <div class="mt-2 text-xl font-extrabold">Welcome to The Blue Dispatch</div>
+          <div class="mt-1 text-slate-600">What this site is, what it isn’t, and how it will run.</div>
+        </a>
       </div>
     </section>
-
+ 
     <section class="bg-white border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
         <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
         <p class="mt-4 text-slate-600 text-base sm:text-lg">
           Please contact
-          <a href="mailto:ethansamuelross@icloud.com" class="font-semibold text-[#06142b] hover:underline">ethansamuelross@icloud.com</a>
+          <a href="https://x.com/blue_dispatch" class="font-semibold text-[#06142b] hover:underline">@blue_dispatch</a>
           for inquiries.
         </p>
       </div>
     </section>
   </main>
-
+ 
   <footer class="bg-white border-t border-slate-200 py-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
       <p>© <span data-year></span> The Blue Dispatch</p>
     </div>
   </footer>
-
+ 
   <script src="assets/site.js"></script>
-
-  <script>
-    (async function () {
-      const postsList = document.getElementById("postsList");
-      const postsError = document.getElementById("postsError");
-
-      try {
-        const res = await fetch("posts/posts.json", { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
-        const posts = await res.json();
-        if (!Array.isArray(posts)) throw new Error("Invalid JSON");
-
-        // We still sort by date to keep the correct order, even though we won't display it
-        posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
-        postsList.innerHTML = posts.map(p => {
-          return `
-            <a href="posts/${p.file}"
-               class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:bg-slate-50 transition block">
-              <div class="text-xl font-extrabold text-[#06142b]">${p.title}</div>
-              <div class="mt-2 text-slate-600">${p.excerpt || ""}</div>
-            </a>
-          `;
-        }).join("");
-
-      } catch (e) {
-        console.error(e);
-        postsError.classList.remove("hidden");
-      }
-    })();
-  </script>
 </body>
 </html>
