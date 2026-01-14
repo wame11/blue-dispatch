@@ -10,8 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background-color: #f8fafc;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 
@@ -30,9 +35,7 @@
             <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
             <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
             <a href="live.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Live News</a>
-            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">
-              Donate
-            </a>
+            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
           </div>
         </div>
 
@@ -71,15 +74,15 @@
       </div>
 
       <!-- FEED CONTAINER -->
-      <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden min-h-[500px]">
-        <!-- INTEGRATED SOCIABLEKIT WIDGET -->
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden min-h-[500px] p-4">
+        <!-- SOCIABLEKIT WIDGET -->
         <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
         <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
       </div>
 
-      <!-- IF SOCIABLEKIT WIDGET DOESN'T RENDER, USE IFRAME AS A BACKUP -->
+      <!-- BACKUP IFRAME FOR NO-SCRIPT SCENARIOS -->
       <noscript>
-        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" frameborder="0" width="100%" height="1000"></iframe>
+        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" frameborder="0" width="100%" height="800"></iframe>
       </noscript>
     </section>
 
@@ -107,6 +110,5 @@
   <script>
     document.querySelector('[data-year]').textContent = new Date().getFullYear();
   </script>
-  <script src="assets/site.js"></script>
 </body>
 </html>
