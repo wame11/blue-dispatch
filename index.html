@@ -16,25 +16,27 @@
 </head>
  
 <body class="bg-white text-[#06142b]">
+  <!-- HEADER -->
   <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <a href="index.html" class="flex items-center gap-2">
           <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">The Blue Dispatch</span>
         </a>
- 
+
         <div class="hidden md:block">
           <div class="flex items-baseline space-x-2">
             <a href="index.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Home</a>
-            <a href="live.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Live News</a>
             <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
             <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+            <a href="live.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Live News</a>
             <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">
               Donate
             </a>
           </div>
         </div>
- 
+
+        <!-- Mobile -->
         <div class="-mr-2 flex md:hidden">
           <button type="button" id="mobile-menu-button"
                   class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
@@ -45,21 +47,22 @@
         </div>
       </div>
     </nav>
- 
+
     <div class="md:hidden hidden" id="mobile-menu">
       <div class="max-w-6xl mx-auto px-4 pb-4">
         <div class="pt-2 space-y-1">
           <a href="index.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Home</a>
-          <a href="live.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Live News</a>
           <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
           <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
+          <a href="live.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Live News</a>
           <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
         </div>
       </div>
     </div>
   </header>
- 
+
   <main>
+    <!-- HERO -->
     <section class="bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
@@ -68,22 +71,20 @@
             (fast, clear, centre-right commentary)
           </span>
         </h1>
- 
+
         <p class="mt-6 text-base sm:text-lg text-slate-600 max-w-3xl mx-auto">
           Short, structured dispatches on UK policy and politics — focused on outcomes, trade-offs, and practical ideas.
         </p>
- 
+
         <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <a href="posts.html" class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-white px-6 py-3 font-semibold hover:opacity-90">
             Read all posts →
           </a>
-          <a href="donate.html" class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3 font-semibold text-[#06142b] hover:bg-slate-50">
-            Support the Dispatch
-          </a>
         </div>
       </div>
     </section>
- 
+
+    <!-- LATEST 2 -->
     <section class="bg-slate-50 py-12 sm:py-14 border-t border-slate-200">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-end justify-between gap-4 mb-8">
@@ -93,35 +94,37 @@
           </div>
           <a href="posts.html" class="hidden sm:inline text-sm font-semibold text-[#06142b] hover:underline">View all →</a>
         </div>
- 
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Newest -->
           <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
-            <div class="text-sm font-semibold text-slate-500">13 January 2026</div>
+            <div class="text-sm font-semibold text-slate-500">11 January 2026</div>
             <h3 class="mt-3 text-2xl font-extrabold leading-snug">
-              <a class="hover:underline" href="posts/trump-iran-tariffs.html">Why President Trump’s 25 Percent Tariff Could Break the Iranian Regime</a>
+              <a class="hover:underline" href="posts/2026-01-11-how-this-site-works.html">How The Blue Dispatch Works</a>
             </h3>
             <p class="mt-3 text-slate-600 flex-grow">
-              Analysis of the potential impact of new U.S. tariffs on countries trading with Iran, including the strategic pressure on China and Russia.
+              Format, posting rhythm, GitHub setup logic, and how support works.
             </p>
             <div class="mt-5">
               <a class="inline-flex items-center justify-center rounded-lg bg-[#06142b] text-white px-4 py-2 font-semibold hover:opacity-90"
-                 href="posts/trump-iran-tariffs.html">
+                 href="posts/2026-01-11-how-this-site-works.html">
                 Read →
               </a>
             </div>
           </article>
- 
+
+          <!-- Second newest -->
           <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col">
-            <div class="text-sm font-semibold text-slate-500">10 January 2026</div>
+            <div class="text-sm font-semibold text-slate-500">8 January 2026</div>
             <h3 class="mt-3 text-2xl font-extrabold leading-snug">
-              <a class="hover:underline" href="posts/trump-iran-statement.html">Trump’s Iran ‘Freedom’ Message: What It Signals and What Could Happen Next</a>
+              <a class="hover:underline" href="posts/2026-01-08-welcome.html">Welcome to The Blue Dispatch</a>
             </h3>
             <p class="mt-3 text-slate-600 flex-grow">
-              A close read of Trump’s Truth Social statement, the unrest in Iran, and realistic scenarios if the regime weakens or the US acts.
+              What this site is, what it isn’t, and how dispatches will be written.
             </p>
             <div class="mt-5">
               <a class="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 font-semibold text-[#06142b] hover:bg-slate-50"
-                 href="posts/trump-iran-statement.html">
+                 href="posts/2026-01-08-welcome.html">
                 Read →
               </a>
             </div>
@@ -129,28 +132,30 @@
         </div>
       </div>
     </section>
- 
+
+    <!-- CONTACT -->
     <section class="bg-white py-12 sm:py-14 border-t border-slate-200">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
         <p class="mt-4 text-slate-600 text-base sm:text-lg">
           Please contact
-          <a href="https://x.com/blue_dispatch" target="_blank" class="font-semibold text-[#06142b] hover:underline">(@blue_dispatch)</a>
+          <a href="https://x.com/blue_dispatch" class="font-semibold text-[#06142b] hover:underline">@blue_dispatch</a>
           for inquiries.
         </p>
       </div>
     </section>
   </main>
- 
+
+  <!-- FOOTER -->
   <footer class="bg-white border-t border-slate-200 py-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
       <p>© <span data-year></span> The Blue Dispatch</p>
       <p class="mt-2 text-sm">
-        <a class="hover:underline" href="https://x.com/blue_dispatch" target="_blank">(@blue_dispatch)</a>
+        <a class="hover:underline" href="https://x.com/blue_dispatch">@blue_dispatch</a>
       </p>
     </div>
   </footer>
- 
+
   <script src="assets/site.js"></script>
 </body>
 </html>
