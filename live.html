@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live News · The Blue Dispatch</title>
-  
-  <!-- TailwindCSS for styling -->
+  <meta name="description" content="Live OSINT feed from @osint613." />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
+
   <style>
     body {
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -26,14 +26,20 @@
       z-index: 50;
     }
     .widget-container {
-      min-height: 500px;
       max-width: 48rem;
-      margin: 3rem auto;
+      margin: 0 auto;
       background-color: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 0.75rem;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       overflow: hidden;
+    }
+    .widget-frame {
+      width: 100%;
+      height: 1100px;
+      border: 0;
+      display: block;
+      background: #ffffff;
     }
     footer {
       background-color: #ffffff;
@@ -45,29 +51,24 @@
     }
   </style>
 </head>
+
 <body>
-  
+
   <!-- HEADER -->
   <header class="py-4 px-6">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      
-      <!-- Logo -->
-      <a href="index.html" class="text-xl font-extrabold">
-        The Blue Dispatch
-      </a>
-      
-      <!-- Navigation Links -->
+      <a href="index.html" class="text-xl font-extrabold">The Blue Dispatch</a>
+
       <nav class="hidden md:flex space-x-6">
         <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Home</a>
         <a href="posts.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Posts</a>
         <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">About</a>
-        <a href="live.html" class="text-sm font-medium text-blue-900 font-bold">Live News</a>
+        <a href="live.html" class="text-sm font-bold text-blue-900">Live News</a>
         <a href="donate.html" class="text-sm font-medium text-white bg-blue-900 px-4 py-2 rounded hover:opacity-90">Donate</a>
       </nav>
-      
-      <!-- Mobile Navigation -->
+
       <div class="md:hidden">
-        <button class="text-gray-600 hover:text-blue-900">
+        <button class="text-gray-600 hover:text-blue-900" aria-label="Menu">
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -75,42 +76,71 @@
       </div>
     </div>
   </header>
-  
-  <!-- MAIN CONTENT -->
+
+  <!-- MAIN -->
   <main class="py-12 px-6 bg-gray-50">
-    <div class="text-center mb-8">
+    <div class="max-w-3xl mx-auto text-center mb-8">
       <h1 class="text-4xl font-extrabold">Live News</h1>
       <p class="mt-2 text-gray-600">
-        Stay updated with real-time OSINT reports from 
-        <a href="https://x.com/osint613" target="_blank" class="text-blue-900 font-medium hover:underline">@osint613</a>.
+        Stay updated with real-time OSINT reports from
+        <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer"
+           class="text-blue-900 font-medium hover:underline">@osint613</a>.
       </p>
     </div>
-    
-    <!-- Widget Container -->
+
+    <!-- PRIMARY EMBED: iFrame (most reliable) -->
     <div class="widget-container">
-      <!-- Primary SociableKit Widget -->
-      <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
-      <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
+      <iframe
+        class="widget-frame"
+        title="Live feed from @osint613"
+        src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allow="clipboard-read; clipboard-write">
+      </iframe>
     </div>
-    
-    <!-- Backup for No-Script -->
-    <noscript>
-      <div class="widget-container">
-        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" 
-                frameborder="0" width="100%" height="1000"></iframe>
-      </div>
-    </noscript>
+
+    <!-- Simple fallback link -->
+    <div class="max-w-3xl mx-auto text-center mt-4 text-sm text-gray-500">
+      If this stays blank on Brave or Safari, your tracker blocker is probably “helping”.
+      Open the feed directly:
+      <a class="text-blue-900 hover:underline"
+         href="https://widgets.sociablekit.com/twitter-feed/iframe/25643681"
+         target="_blank" rel="noopener noreferrer">view embed</a>
+    </div>
+
+    <!-- OPTIONAL: JavaScript embed (fixed script path) -->
+    <div class="max-w-3xl mx-auto mt-10">
+      <details class="bg-white border border-slate-200 rounded-xl p-4">
+        <summary class="cursor-pointer font-semibold text-slate-800">
+          Optional: test the JavaScript embed (click to expand)
+        </summary>
+        <p class="mt-2 text-sm text-slate-600">
+          This should work only if your browser is not blocking SociableKIT scripts.
+        </p>
+
+        <div class="mt-4 widget-container">
+          <div class="p-4">
+            <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
+          </div>
+        </div>
+
+        <!-- Correct script for a twitter-feed widget -->
+        <script src="https://widgets.sociablekit.com/twitter-feed/widget.js" async></script>
+      </details>
+    </div>
   </main>
-  
+
   <!-- FOOTER -->
   <footer>
     <p>&copy; <span id="current-year"></span> The Blue Dispatch</p>
     <p>
-      <a href="https://x.com/blue_dispatch" class="text-blue-900 hover:underline" target="_blank">@blue_dispatch</a>
+      <a href="https://x.com/blue_dispatch" class="text-blue-900 hover:underline" target="_blank" rel="noopener noreferrer">
+        @blue_dispatch
+      </a>
     </p>
   </footer>
-  
-  <!-- JS to Set Year Dynamically -->
+
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
