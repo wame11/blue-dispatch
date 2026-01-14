@@ -25,7 +25,7 @@
       top: 0;
       z-index: 50;
     }
-    .widget-container {
+    .card {
       max-width: 48rem;
       margin: 0 auto;
       background-color: #ffffff;
@@ -33,13 +33,6 @@
       border-radius: 0.75rem;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-    }
-    .widget-frame {
-      width: 100%;
-      height: 1100px;
-      border: 0;
-      display: block;
-      background: #ffffff;
     }
     footer {
       background-color: #ffffff;
@@ -82,52 +75,32 @@
     <div class="max-w-3xl mx-auto text-center mb-8">
       <h1 class="text-4xl font-extrabold">Live News</h1>
       <p class="mt-2 text-gray-600">
-        Stay updated with real-time OSINT reports from
+        Real-time updates from
         <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer"
            class="text-blue-900 font-medium hover:underline">@osint613</a>.
       </p>
     </div>
 
-    <!-- PRIMARY EMBED: iFrame (most reliable) -->
-    <div class="widget-container">
-      <iframe
-        class="widget-frame"
-        title="Live feed from @osint613"
-        src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allow="clipboard-read; clipboard-write">
-      </iframe>
-    </div>
+    <!-- EMBED CARD -->
+    <div class="card p-4">
+      <!-- If the script loads, this becomes the timeline -->
+      <a class="twitter-timeline"
+         href="https://twitter.com/osint613"
+         data-height="950"
+         data-dnt="true"
+         data-theme="light"
+         data-chrome="noheader nofooter noborders transparent">
+        Tweets by @osint613
+      </a>
 
-    <!-- Simple fallback link -->
-    <div class="max-w-3xl mx-auto text-center mt-4 text-sm text-gray-500">
-      If this stays blank on Brave or Safari, your tracker blocker is probably “helping”.
-      Open the feed directly:
-      <a class="text-blue-900 hover:underline"
-         href="https://widgets.sociablekit.com/twitter-feed/iframe/25643681"
-         target="_blank" rel="noopener noreferrer">view embed</a>
-    </div>
-
-    <!-- OPTIONAL: JavaScript embed (fixed script path) -->
-    <div class="max-w-3xl mx-auto mt-10">
-      <details class="bg-white border border-slate-200 rounded-xl p-4">
-        <summary class="cursor-pointer font-semibold text-slate-800">
-          Optional: test the JavaScript embed (click to expand)
-        </summary>
-        <p class="mt-2 text-sm text-slate-600">
-          This should work only if your browser is not blocking SociableKIT scripts.
-        </p>
-
-        <div class="mt-4 widget-container">
-          <div class="p-4">
-            <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
-          </div>
-        </div>
-
-        <!-- Correct script for a twitter-feed widget -->
-        <script src="https://widgets.sociablekit.com/twitter-feed/widget.js" async></script>
-      </details>
+      <!-- Fallback message that will still be visible if embeds are blocked -->
+      <div class="mt-4 text-sm text-gray-500">
+        If the feed is blank, your browser is blocking X embeds (common on Brave and Safari).
+        Try allowing “cross-site tracking” for this site, or open the account directly:
+        <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">
+          x.com/osint613
+        </a>
+      </div>
     </div>
   </main>
 
@@ -144,5 +117,9 @@
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
+
+  <!-- Official X widgets script (must be present) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </body>
 </html>
