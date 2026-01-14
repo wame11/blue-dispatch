@@ -31,7 +31,7 @@
       background-color: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 0.75rem;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
       overflow: hidden;
     }
     footer {
@@ -46,8 +46,6 @@
 </head>
 
 <body>
-
-  <!-- HEADER -->
   <header class="py-4 px-6">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="index.html" class="text-xl font-extrabold">The Blue Dispatch</a>
@@ -70,7 +68,6 @@
     </div>
   </header>
 
-  <!-- MAIN -->
   <main class="py-12 px-6 bg-gray-50">
     <div class="max-w-3xl mx-auto text-center mb-8">
       <h1 class="text-4xl font-extrabold">Live News</h1>
@@ -81,30 +78,15 @@
       </p>
     </div>
 
-    <!-- EMBED CARD -->
     <div class="card p-4">
-      <!-- If the script loads, this becomes the timeline -->
-      <a class="twitter-timeline"
-         href="https://twitter.com/osint613"
-         data-height="950"
-         data-dnt="true"
-         data-theme="light"
-         data-chrome="noheader nofooter noborders transparent">
-        Tweets by @osint613
-      </a>
+      <div id="timeline-target"></div>
 
-      <!-- Fallback message that will still be visible if embeds are blocked -->
-      <div class="mt-4 text-sm text-gray-500">
-        If the feed is blank, your browser is blocking X embeds (common on Brave and Safari).
-        Try allowing “cross-site tracking” for this site, or open the account directly:
-        <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">
-          x.com/osint613
-        </a>
+      <div id="status" class="mt-4 text-sm text-gray-500">
+        Loading feed…
       </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <p>&copy; <span id="current-year"></span> The Blue Dispatch</p>
     <p>
@@ -116,10 +98,58 @@
 
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    function setStatus(html) {
+      document.getElementById("status").innerHTML = html;
+    }
+
+    function render() {
+      try {
+        if (!window.twttr || !twttr.widgets) {
+          setStatus('X widgets not available. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+          return;
+        }
+
+        setStatus("Rendering…");
+
+        twttr.widgets.createTimeline(
+          { sourceType: "profile", screenName: "osint613" },
+          document.getElementById("timeline-target"),
+          {
+            height: 950,
+            theme: "light",
+            dnt: true,
+            chrome: "noheader nofooter noborders transparent"
+          }
+        ).then(function(el) {
+          if (el) {
+            setStatus('If this still looks empty, open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+          } else {
+            setStatus('Could not render timeline. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+          }
+        }).catch(function(err) {
+          setStatus("Timeline error: " + String(err) + '. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+        });
+      } catch (e) {
+        setStatus("JS error: " + String(e) + '. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+      }
+    }
+
+    // Load the official script, then render.
+    (function() {
+      var s = document.createElement("script");
+      s.src = "https://platform.twitter.com/widgets.js";
+      s.async = true;
+      s.charset = "utf-8";
+      s.onload = function () {
+        // Wait a tick to ensure twttr is fully initialised.
+        setTimeout(render, 0);
+      };
+      s.onerror = function () {
+        setStatus('Blocked: could not load X widgets. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+      };
+      document.body.appendChild(s);
+    })();
   </script>
-
-  <!-- Official X widgets script (must be present) -->
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 </body>
 </html>
