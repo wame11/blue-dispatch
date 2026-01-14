@@ -63,20 +63,18 @@
 
   <main class="bg-slate-50">
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
-      <div class="text-center">
+      <div class="text-center mb-10">
         <h1 class="text-3xl sm:text-4xl font-extrabold">Live News</h1>
         <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
-          Live News feed from <a class="font-semibold text-[#06142b] hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener">@osint613</a>.
+          Real-time updates and OSINT reports from <a class="font-semibold text-[#06142b] hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener">@osint613</a>.
         </p>
       </div>
 
-      <!-- Twitter/X Feed Container -->
-      <div class="mt-10 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <!-- We use a specific ID for the feed to target it with JS -->
-        <div id="twitter-feed" class="w-full min-h-[600px] flex justify-center items-center">
-             <!-- Fallback content while loading -->
-             <p class="text-slate-500">Loading feed...</p>
-        </div>
+      <!-- FEED CONTAINER -->
+      <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden min-h-[500px]">
+        <!-- INTEGRATED SOCIABLEKIT WIDGET -->
+        <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
+        <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
       </div>
     </section>
 
@@ -100,50 +98,6 @@
       </p>
     </div>
   </footer>
-
-  <!-- 
-    Robust Twitter Widget Script 
-    1. Loads the library securely.
-    2. Explicitly creates the timeline in the #twitter-feed div.
-  -->
-  <script>
-    window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
-
-      return t;
-    }(document, "script", "twitter-wjs"));
-
-    // When the widget library is ready, render the feed
-    twttr.ready(function(twttr) {
-      var feedContainer = document.getElementById('twitter-feed');
-      // Clear the "Loading feed..." text
-      feedContainer.innerHTML = '';
-      
-      twttr.widgets.createTimeline(
-        {
-          sourceType: 'profile',
-          screenName: 'osint613'
-        },
-        feedContainer,
-        {
-          height: 900,
-          theme: 'light',
-          width: '100%'
-        }
-      );
-    });
-  </script>
 
   <script src="assets/site.js"></script>
 </body>
