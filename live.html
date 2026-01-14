@@ -1,114 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live News · The Blue Dispatch</title>
-  <meta name="description" content="Live news feed (OSINT) from @osint613." />
-
+  
+  <!-- TailwindCSS for styling -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+  
   <style>
     body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background-color: #f8fafc;
+      color: #06142b;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
     }
-    html {
-      scroll-behavior: smooth;
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .widget-container {
+      min-height: 500px;
+      max-width: 48rem;
+      margin: 3rem auto;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+      color: #6b7280;
     }
   </style>
 </head>
-
-<body class="bg-white text-[#06142b]">
+<body>
+  
   <!-- HEADER -->
-  <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="index.html" class="flex items-center gap-2">
-          <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-[#06142b]">The Blue Dispatch</span>
-        </a>
-
-        <div class="hidden md:block">
-          <div class="flex items-baseline space-x-2">
-            <a href="index.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
-            <a href="posts.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
-            <a href="about.html" class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
-            <a href="live.html" class="px-3 py-2 rounded-md text-sm font-semibold text-[#06142b] bg-slate-100">Live News</a>
-            <a href="donate.html" class="ml-1 px-4 py-2 rounded-md text-sm font-semibold bg-[#06142b] text-white hover:opacity-90">Donate</a>
-          </div>
-        </div>
-
-        <!-- Mobile -->
-        <div class="-mr-2 flex md:hidden">
-          <button type="button" id="mobile-menu-button"
-                  class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-[#06142b] hover:bg-slate-200">
-            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <div class="md:hidden hidden" id="mobile-menu">
-      <div class="max-w-6xl mx-auto px-4 pb-4">
-        <div class="pt-2 space-y-1">
-          <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Home</a>
-          <a href="posts.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">Posts</a>
-          <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:text-[#06142b] hover:bg-slate-100">About</a>
-          <a href="live.html" class="block px-3 py-2 rounded-md text-base font-semibold text-[#06142b] bg-slate-100">Live News</a>
-          <a href="donate.html" class="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#06142b] text-center hover:opacity-90">Donate</a>
-        </div>
+  <header class="py-4 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      
+      <!-- Logo -->
+      <a href="index.html" class="text-xl font-extrabold">
+        The Blue Dispatch
+      </a>
+      
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Home</a>
+        <a href="posts.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Posts</a>
+        <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">About</a>
+        <a href="live.html" class="text-sm font-medium text-blue-900 font-bold">Live News</a>
+        <a href="donate.html" class="text-sm font-medium text-white bg-blue-900 px-4 py-2 rounded hover:opacity-90">Donate</a>
+      </nav>
+      
+      <!-- Mobile Navigation -->
+      <div class="md:hidden">
+        <button class="text-gray-600 hover:text-blue-900">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
-
-  <main class="bg-slate-50">
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
-      <div class="text-center mb-10">
-        <h1 class="text-3xl sm:text-4xl font-extrabold">Live News</h1>
-        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">
-          Real-time updates and OSINT reports from <a class="font-semibold text-[#06142b] hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener">@osint613</a>.
-        </p>
-      </div>
-
-      <!-- FEED CONTAINER -->
-      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden min-h-[500px] p-4">
-        <!-- SOCIABLEKIT WIDGET -->
-        <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
-        <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
-      </div>
-
-      <!-- BACKUP IFRAME FOR NO-SCRIPT SCENARIOS -->
-      <noscript>
-        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" frameborder="0" width="100%" height="800"></iframe>
-      </noscript>
-    </section>
-
-    <section class="bg-white border-t border-slate-200">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
-        <p class="mt-4 text-slate-600 text-base sm:text-lg">
-          Please contact
-          <a href="https://x.com/blue_dispatch" target="_blank" rel="noopener" class="font-semibold text-[#06142b] hover:underline">@blue_dispatch</a>
-          for inquiries.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-white border-t border-slate-200 py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
-      <p>© <span data-year></span> The Blue Dispatch</p>
-      <p class="mt-2 text-sm">
-        <a class="hover:underline" href="https://x.com/blue_dispatch" target="_blank" rel="noopener">@blue_dispatch</a>
+  
+  <!-- MAIN CONTENT -->
+  <main class="py-12 px-6 bg-gray-50">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-extrabold">Live News</h1>
+      <p class="mt-2 text-gray-600">
+        Stay updated with real-time OSINT reports from 
+        <a href="https://x.com/osint613" target="_blank" class="text-blue-900 font-medium hover:underline">@osint613</a>.
       </p>
     </div>
+    
+    <!-- Widget Container -->
+    <div class="widget-container">
+      <!-- Primary SociableKit Widget -->
+      <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
+      <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
+    </div>
+    
+    <!-- Backup for No-Script -->
+    <noscript>
+      <div class="widget-container">
+        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" 
+                frameborder="0" width="100%" height="1000"></iframe>
+      </div>
+    </noscript>
+  </main>
+  
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="current-year"></span> The Blue Dispatch</p>
+    <p>
+      <a href="https://x.com/blue_dispatch" class="text-blue-900 hover:underline" target="_blank">@blue_dispatch</a>
+    </p>
   </footer>
-
+  
+  <!-- JS to Set Year Dynamically -->
   <script>
-    document.querySelector('[data-year]').textContent = new Date().getFullYear();
+    document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
