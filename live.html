@@ -70,14 +70,13 @@
         </p>
       </div>
 
-      <div class="mt-10 bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 min-h-[600px] flex justify-center">
-        <!-- Twitter Timeline Embed -->
-        <a class="twitter-timeline" 
-           data-height="900" 
-           data-theme="light"
-           href="https://twitter.com/osint613?ref_src=twsrc%5Etfw">
-          Tweets by osint613
-        </a>
+      <!-- Twitter/X Feed Container -->
+      <div class="mt-10 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <!-- We use a specific ID for the feed to target it with JS -->
+        <div id="twitter-feed" class="w-full min-h-[600px] flex justify-center items-center">
+             <!-- Fallback content while loading -->
+             <p class="text-slate-500">Loading feed...</p>
+        </div>
       </div>
     </section>
 
@@ -102,7 +101,11 @@
     </div>
   </footer>
 
-  <!-- Official Twitter Widget Script Injection -->
+  <!-- 
+    Robust Twitter Widget Script 
+    1. Loads the library securely.
+    2. Explicitly creates the timeline in the #twitter-feed div.
+  -->
   <script>
     window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
@@ -120,6 +123,26 @@
 
       return t;
     }(document, "script", "twitter-wjs"));
+
+    // When the widget library is ready, render the feed
+    twttr.ready(function(twttr) {
+      var feedContainer = document.getElementById('twitter-feed');
+      // Clear the "Loading feed..." text
+      feedContainer.innerHTML = '';
+      
+      twttr.widgets.createTimeline(
+        {
+          sourceType: 'profile',
+          screenName: 'osint613'
+        },
+        feedContainer,
+        {
+          height: 900,
+          theme: 'light',
+          width: '100%'
+        }
+      );
+    });
   </script>
 
   <script src="assets/site.js"></script>
