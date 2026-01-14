@@ -72,8 +72,15 @@
 
       <!-- FEED CONTAINER -->
       <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden min-h-[500px]">
+        <!-- INTEGRATED SOCIABLEKIT WIDGET -->
         <div class="sk-ww-twitter-feed" data-embed-id="25643681"></div>
+        <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" defer></script>
       </div>
+
+      <!-- IF SOCIABLEKIT WIDGET DOESN'T RENDER, USE IFRAME AS A BACKUP -->
+      <noscript>
+        <iframe src="https://widgets.sociablekit.com/twitter-feed/iframe/25643681" frameborder="0" width="100%" height="1000"></iframe>
+      </noscript>
     </section>
 
     <section class="bg-white border-t border-slate-200">
@@ -97,7 +104,9 @@
     </div>
   </footer>
 
+  <script>
+    document.querySelector('[data-year]').textContent = new Date().getFullYear();
+  </script>
   <script src="assets/site.js"></script>
-  <script src="https://widgets.sociablekit.com/twitter-profile/widget.js" async defer></script>
 </body>
 </html>
