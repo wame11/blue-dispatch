@@ -42,6 +42,20 @@
       padding: 2rem 1rem;
       color: #6b7280;
     }
+    /* Fallback button style */
+    .fallback-btn {
+      display: inline-block;
+      background-color: #0f172a;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    .fallback-btn:hover {
+      background-color: #1e293b;
+    }
   </style>
 </head>
 
@@ -78,12 +92,19 @@
       </p>
     </div>
 
-    <div class="card p-4">
-      <div id="timeline-target"></div>
-
-      <div id="status" class="mt-4 text-sm text-gray-500">
-        Loading feed…
+    <div class="card p-6 text-center">
+      <div id="timeline-target" class="min-h-[200px] flex flex-col justify-center items-center">
+         <!-- Default state before JS runs -->
+         <div id="loading-spinner">
+           <svg class="animate-spin h-8 w-8 text-blue-900 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+           </svg>
+           <p class="text-gray-500">Connecting to X feed...</p>
+         </div>
       </div>
+
+      <div id="status" class="mt-4 text-sm text-gray-500 hidden"></div>
     </div>
   </main>
 
@@ -99,55 +120,84 @@
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    function setStatus(html) {
-      document.getElementById("status").innerHTML = html;
+    // Helper to show the manual link button if embedding fails
+    function showFallback(reason) {
+      const container = document.getElementById("timeline-target");
+      const status = document.getElementById("status");
+      
+      // Clear the loading spinner
+      container.innerHTML = `
+        <div class="py-8">
+          <p class="mb-4 text-gray-600 font-medium">${reason}</p>
+          <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer" class="fallback-btn">
+            View @osint613 on X
+          </a>
+          <p class="mt-4 text-xs text-gray-400">
+            Note: X (Twitter) often requires you to be logged in to view embedded feeds.
+          </p>
+        </div>
+      `;
+      
+      status.classList.add('hidden');
     }
 
     function render() {
-      try {
-        if (!window.twttr || !twttr.widgets) {
-          setStatus('X widgets not available. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
-          return;
-        }
-
-        setStatus("Rendering…");
-
-        twttr.widgets.createTimeline(
-          { sourceType: "profile", screenName: "osint613" },
-          document.getElementById("timeline-target"),
-          {
-            height: 950,
-            theme: "light",
-            dnt: true,
-            chrome: "noheader nofooter noborders transparent"
-          }
-        ).then(function(el) {
-          if (el) {
-            setStatus('If this still looks empty, open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
-          } else {
-            setStatus('Could not render timeline. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
-          }
-        }).catch(function(err) {
-          setStatus("Timeline error: " + String(err) + '. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
-        });
-      } catch (e) {
-        setStatus("JS error: " + String(e) + '. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+      // 1. Check if X widget library loaded
+      if (!window.twttr || !twttr.widgets) {
+        showFallback("Unable to load X widgets (likely blocked by network or ad-blocker).");
+        return;
       }
+
+      const target = document.getElementById("timeline-target");
+      
+      // 2. Set a timeout. If X doesn't render in 3 seconds, show fallback.
+      const renderTimeout = setTimeout(() => {
+        // Only show fallback if the box is still empty
+        if (target.offsetHeight < 300) { 
+           showFallback("Feed took too long to load.");
+        }
+      }, 3000);
+
+      // 3. Attempt to create the timeline
+      twttr.widgets.createTimeline(
+        { sourceType: "profile", screenName: "osint613" },
+        target,
+        {
+          height: 950,
+          theme: "light",
+          dnt: true,
+          chrome: "noheader nofooter noborders transparent"
+        }
+      ).then(function(el) {
+        clearTimeout(renderTimeout);
+        // Clear spinner manually if successful
+        const spinner = document.getElementById("loading-spinner");
+        if(spinner) spinner.remove();
+
+        if (!el) {
+          showFallback("Feed Unavailable (You may need to log in to X).");
+        }
+      }).catch(function(err) {
+        clearTimeout(renderTimeout);
+        showFallback("Connection blocked or refused by X.");
+      });
     }
 
-    // Load the official script, then render.
+    // Load the official script
     (function() {
       var s = document.createElement("script");
       s.src = "https://platform.twitter.com/widgets.js";
       s.async = true;
       s.charset = "utf-8";
+      
       s.onload = function () {
-        // Wait a tick to ensure twttr is fully initialised.
-        setTimeout(render, 0);
+        setTimeout(render, 100); 
       };
+      
       s.onerror = function () {
-        setStatus('Blocked: could not load X widgets. Open directly: <a class="text-blue-900 hover:underline" href="https://x.com/osint613" target="_blank" rel="noopener noreferrer">x.com/osint613</a>');
+        showFallback("Network blocked access to X widgets.");
       };
+      
       document.body.appendChild(s);
     })();
   </script>
