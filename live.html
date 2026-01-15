@@ -45,16 +45,16 @@
     /* Fallback button style */
     .fallback-btn {
       display: inline-block;
-      background-color: #0f172a;
+      background-color: #06142b; /* Changed to #06142B */
       color: white;
       padding: 12px 24px;
       border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
-      transition: background-color 0.2s;
+      transition: opacity 0.2s;
     }
     .fallback-btn:hover {
-      background-color: #1e293b;
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -64,16 +64,21 @@
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="index.html" class="text-xl font-extrabold">The Blue Dispatch</a>
 
-      <nav class="hidden md:flex space-x-6">
-        <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Home</a>
-        <a href="posts.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">Posts</a>
-        <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-blue-900">About</a>
-        <a href="live.html" class="text-sm font-bold text-blue-900">Live News</a>
-        <a href="donate.html" class="text-sm font-medium text-white bg-blue-900 px-4 py-2 rounded hover:opacity-90">Donate</a>
+      <nav class="hidden md:flex space-x-6 items-center">
+        <!-- Gray links -->
+        <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">Home</a>
+        <a href="posts.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">Posts</a>
+        <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">About</a>
+        
+        <!-- Active link: Forced to #06142B -->
+        <a href="live.html" class="text-sm font-bold text-[#06142B]">Live News</a>
+        
+        <!-- Donate Button: Background forced to #06142B -->
+        <a href="donate.html" class="text-sm font-medium text-white px-4 py-2 rounded hover:opacity-90 bg-[#06142B]">Donate</a>
       </nav>
 
       <div class="md:hidden">
-        <button class="text-gray-600 hover:text-blue-900" aria-label="Menu">
+        <button class="text-gray-600 hover:text-[#06142B]" aria-label="Menu">
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -88,7 +93,7 @@
       <p class="mt-2 text-gray-600">
         Real-time updates from
         <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer"
-           class="text-blue-900 font-medium hover:underline">@osint613</a>.
+           class="text-[#06142B] font-medium hover:underline">@osint613</a>.
       </p>
     </div>
 
@@ -96,7 +101,7 @@
       <div id="timeline-target" class="min-h-[200px] flex flex-col justify-center items-center">
          <!-- Default state before JS runs -->
          <div id="loading-spinner">
-           <svg class="animate-spin h-8 w-8 text-blue-900 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+           <svg class="animate-spin h-8 w-8 text-[#06142B] mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
            </svg>
@@ -111,7 +116,7 @@
   <footer>
     <p>&copy; <span id="current-year"></span> The Blue Dispatch</p>
     <p>
-      <a href="https://x.com/blue_dispatch" class="text-blue-900 hover:underline" target="_blank" rel="noopener noreferrer">
+      <a href="https://x.com/blue_dispatch" class="text-[#06142B] hover:underline" target="_blank" rel="noopener noreferrer">
         @blue_dispatch
       </a>
     </p>
@@ -120,12 +125,10 @@
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    // Helper to show the manual link button if embedding fails
     function showFallback(reason) {
       const container = document.getElementById("timeline-target");
       const status = document.getElementById("status");
       
-      // Clear the loading spinner
       container.innerHTML = `
         <div class="py-8">
           <p class="mb-4 text-gray-600 font-medium">${reason}</p>
@@ -142,7 +145,6 @@
     }
 
     function render() {
-      // 1. Check if X widget library loaded
       if (!window.twttr || !twttr.widgets) {
         showFallback("Unable to load X widgets (likely blocked by network or ad-blocker).");
         return;
@@ -150,15 +152,12 @@
 
       const target = document.getElementById("timeline-target");
       
-      // 2. Set a timeout. If X doesn't render in 3 seconds, show fallback.
       const renderTimeout = setTimeout(() => {
-        // Only show fallback if the box is still empty
         if (target.offsetHeight < 300) { 
            showFallback("Feed took too long to load.");
         }
       }, 3000);
 
-      // 3. Attempt to create the timeline
       twttr.widgets.createTimeline(
         { sourceType: "profile", screenName: "osint613" },
         target,
@@ -170,7 +169,6 @@
         }
       ).then(function(el) {
         clearTimeout(renderTimeout);
-        // Clear spinner manually if successful
         const spinner = document.getElementById("loading-spinner");
         if(spinner) spinner.remove();
 
@@ -183,7 +181,6 @@
       });
     }
 
-    // Load the official script
     (function() {
       var s = document.createElement("script");
       s.src = "https://platform.twitter.com/widgets.js";
