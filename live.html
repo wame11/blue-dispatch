@@ -33,6 +33,7 @@
       border-radius: 0.75rem;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
       overflow: hidden;
+      min-height: 300px; /* Ensure card has size even if empty */
     }
     footer {
       background-color: #ffffff;
@@ -42,18 +43,20 @@
       padding: 2rem 1rem;
       color: #6b7280;
     }
-    /* Fallback button style */
-    .fallback-btn {
+    
+    /* Dedicated button style */
+    .fallback-button {
       display: inline-block;
       background-color: #06142b;
-      color: white;
+      color: white !important;
       padding: 12px 24px;
       border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
-      transition: opacity 0.2s;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
     }
-    .fallback-btn:hover {
+    .fallback-button:hover {
       opacity: 0.9;
     }
   </style>
@@ -65,15 +68,12 @@
       <a href="index.html" class="text-xl font-extrabold">The Blue Dispatch</a>
 
       <nav class="hidden md:flex space-x-6 items-center">
-        <!-- Gray links -->
+        <!-- Links with fixed hover color -->
         <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">Home</a>
         <a href="posts.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">Posts</a>
         <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-[#06142B]">About</a>
-        
-        <!-- Active link: Forced to #06142B -->
         <a href="live.html" class="text-sm font-bold text-[#06142B]">Live News</a>
-        
-        <!-- Donate Button: Background forced to #06142B -->
+        <!-- Donate button with fixed background -->
         <a href="donate.html" class="text-sm font-medium text-white px-4 py-2 rounded hover:opacity-90 bg-[#06142B]">Donate</a>
       </nav>
 
@@ -97,19 +97,20 @@
       </p>
     </div>
 
-    <div class="card p-6 text-center">
-      <div id="timeline-target" class="min-h-[200px] flex flex-col justify-center items-center">
-         <!-- Default state before JS runs -->
-         <div id="loading-spinner">
-           <svg class="animate-spin h-8 w-8 text-[#06142B] mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-           </svg>
-           <p class="text-gray-500">Connecting to X feed...</p>
-         </div>
-      </div>
+    <div class="card p-4 text-center">
+      <!-- 1. The Container for the Feed -->
+      <div id="timeline-container"></div>
 
-      <div id="status" class="mt-4 text-sm text-gray-500 hidden"></div>
+      <!-- 2. The Fallback Button (Visible by default) -->
+      <div id="fallback-container">
+        <p class="text-gray-500 pt-8">Loading feed...</p>
+        <a href="https://x.com/osint613" target="_blank" class="fallback-button">
+          View @osint613 on X
+        </a>
+        <p class="text-xs text-gray-400 pb-8">
+          If the feed does not appear, use the button above.
+        </p>
+      </div>
     </div>
   </main>
 
@@ -125,77 +126,52 @@
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    function showFallback(reason) {
-      const container = document.getElementById("timeline-target");
-      const status = document.getElementById("status");
-      
-      container.innerHTML = `
-        <div class="py-8">
-          <p class="mb-4 text-gray-600 font-medium">${reason}</p>
-          <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer" class="fallback-btn">
-            View @osint613 on X
-          </a>
-          <p class="mt-4 text-xs text-gray-400">
-            Note: X (Twitter) often requires you to be logged in to view embedded feeds.
-          </p>
-        </div>
-      `;
-      
-      status.classList.add('hidden');
-    }
-
-    function render() {
+    // Function that runs once the Twitter library is ready
+    function loadTimeline() {
+      // If we are blocked (School), this might not exist.
       if (!window.twttr || !twttr.widgets) {
-        showFallback("Unable to load X widgets (likely blocked by network or ad-blocker).");
-        return;
+         document.querySelector('#fallback-container p').textContent = "Feed blocked by network.";
+         return;
       }
-
-      const target = document.getElementById("timeline-target");
-      
-      // Increased timeout to 10000ms (10 seconds) for slower connections
-      const renderTimeout = setTimeout(() => {
-        if (target.offsetHeight < 300) { 
-           showFallback("Feed took too long to load.");
-        }
-      }, 10000);
 
       twttr.widgets.createTimeline(
         { sourceType: "profile", screenName: "osint613" },
-        target,
+        document.getElementById("timeline-container"),
         {
           height: 950,
           theme: "light",
           dnt: true,
           chrome: "noheader nofooter noborders transparent"
         }
-      ).then(function(el) {
-        clearTimeout(renderTimeout);
-        const spinner = document.getElementById("loading-spinner");
-        if(spinner) spinner.remove();
-
-        if (!el) {
-          showFallback("Feed Unavailable (You may need to log in to X).");
+      ).then(function (el) {
+        // If the widget successfully created an element (el), HIDE the fallback button
+        if (el) {
+          document.getElementById("fallback-container").style.display = "none";
+        } else {
+          // Widget loaded but returned nothing (Login issue / No Tweets)
+          document.querySelector('#fallback-container p').textContent = "Feed unavailable (Login required).";
         }
-      }).catch(function(err) {
-        clearTimeout(renderTimeout);
-        showFallback("Connection blocked or refused by X.");
       });
     }
 
+    // Load the script
     (function() {
       var s = document.createElement("script");
       s.src = "https://platform.twitter.com/widgets.js";
       s.async = true;
       s.charset = "utf-8";
       
-      s.onload = function () {
-        setTimeout(render, 100); 
+      // When script loads, try to build timeline
+      s.onload = function() {
+        // Slight delay to ensure library initializes
+        setTimeout(loadTimeline, 500);
       };
-      
-      s.onerror = function () {
-        showFallback("Network blocked access to X widgets.");
+
+      // If script fails (blocked), update text
+      s.onerror = function() {
+        document.querySelector('#fallback-container p').textContent = "Network blocked X widgets.";
       };
-      
+
       document.body.appendChild(s);
     })();
   </script>
