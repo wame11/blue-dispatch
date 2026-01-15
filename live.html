@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live News · The Blue Dispatch</title>
-  <meta name="description" content="Live updates on Israel, Iran, USA, and UK." />
+  <meta name="description" content="Live updates on the UK, Israel and America." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -129,7 +129,7 @@
         <span class="text-xs text-gray-400">Powered by Google News</span>
       </p>
 
-      <!-- NEW BUTTON HERE -->
+      <!-- External Link to X -->
       <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer" class="x-button">
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
@@ -161,14 +161,11 @@
     async function fetchNews() {
       const container = document.getElementById('news-container');
       
-      // Query: "Israel OR Iran OR United States OR United Kingdom"
-      const searchQuery = 'Israel OR Iran OR "United States" OR "United Kingdom"';
+      // 1. FILTERING: Added -opinion -editorial -commentary to remove opinion pieces
+      const searchQuery = '(Israel OR Iran OR "United States" OR "United Kingdom") -opinion -editorial -commentary';
       const encodedQuery = encodeURIComponent(searchQuery);
       
-      // Google News RSS URL
       const googleRssUrl = `https://news.google.com/rss/search?q=${encodedQuery}&hl=en-US&gl=US&ceid=US:en`;
-      
-      // RSS to JSON Converter
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(googleRssUrl)}`;
 
       try {
@@ -178,12 +175,18 @@
         if (data.status === 'ok' && data.items.length > 0) {
           container.innerHTML = '';
           
+          // 2. SORTING: Force sort by pubDate (Newest first)
+          data.items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+          
           data.items.forEach(item => {
+            // Extra safety check: Skip if title says "Opinion"
+            if (item.title.toLowerCase().includes("opinion")) return;
+
             const date = new Date(item.pubDate).toLocaleDateString(undefined, {
               weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
             });
 
-            // Clean title
+            // Clean title (remove source suffix if present)
             let title = item.title;
             const sourceMatch = title.match(/(.*) - (.*)$/);
             let source = "News";
