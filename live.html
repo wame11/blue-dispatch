@@ -45,7 +45,7 @@
     /* Fallback button style */
     .fallback-btn {
       display: inline-block;
-      background-color: #06142b; /* Changed to #06142B */
+      background-color: #06142b;
       color: white;
       padding: 12px 24px;
       border-radius: 8px;
@@ -152,11 +152,12 @@
 
       const target = document.getElementById("timeline-target");
       
+      // Increased timeout to 10000ms (10 seconds) for slower connections
       const renderTimeout = setTimeout(() => {
         if (target.offsetHeight < 300) { 
            showFallback("Feed took too long to load.");
         }
-      }, 3000);
+      }, 10000);
 
       twttr.widgets.createTimeline(
         { sourceType: "profile", screenName: "osint613" },
