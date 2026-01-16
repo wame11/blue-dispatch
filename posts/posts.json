@@ -7,31 +7,38 @@
       "date": "2026-01-16",
       "excerpt": "A strategic look at why Labour may tolerate disruptive protests while competing for votes in a tight election.",
       "tags": ["Politics", "UK", "Labour"]
+    },
+    {
+      "title": "Why President Trump’s 25 Percent Tariff Could Break the Iranian Regime and Pressure Its Allies",
+      "slug": "trump-iran-tariffs",
+      "url": "/posts/trump-iran-tariffs.html",
+      "date": "2026-01-13",
+      "excerpt": "Analysis of the potential impact of new U.S. tariffs on countries trading with Iran, including the strategic pressure on China and Russia.",
+      "tags": ["US", "Iran", "Trade"]
+    },
+    {
+      "title": "Trump’s Iran ‘Freedom’ Message: What It Signals and What Could Happen Next",
+      "slug": "trump-iran-statement",
+      "url": "/posts/trump-iran-statement.html",
+      "date": "2026-01-10",
+      "excerpt": "A close read of Trump’s Truth Social statement, the unrest in Iran, and realistic scenarios if the regime weakens or the US acts.",
+      "tags": ["US", "Iran", "Politics"]
+    },
+    {
+      "title": "Why Recognising a Palestinian State Now Is a Mistake",
+      "slug": "palestinian-state-mistake",
+      "url": "/posts/2026-01-14-labour-palestinian-recognition.html",
+      "date": "2026-01-08",
+      "excerpt": "An argument against recognition under current conditions, focused on security, legitimacy, and incentives.",
+      "tags": ["Middle East", "UK", "Security"]
+    },
+    {
+      "title": "Welcome to The Blue Dispatch",
+      "slug": "welcome-blue-dispatch",
+      "url": "/posts/2026-01-08-welcome.html",
+      "date": "2026-01-08",
+      "excerpt": "What this site is, what it isn’t, and how dispatches will be written.",
+      "tags": ["Site", "Editorial"]
     }
   ]
-},
-{
-    "title": "Why President Trump’s 25 Percent Tariff Could Break the Iranian Regime and Pressure Its Allies",
-    "date": "2026-01-13",
-    "excerpt": "Analysis of the potential impact of new U.S. tariffs on countries trading with Iran, including the strategic pressure on China and Russia.",
-    "file": "trump-iran-tariffs.html"
-  },
-  {
-    "title": "Trump’s Iran ‘Freedom’ Message: What It Signals and What Could Happen Next",
-    "date": "2026-01-10",
-    "excerpt": "A close read of Trump’s Truth Social statement, the unrest in Iran, and realistic scenarios if the regime weakens or the US acts.",
-    "file": "trump-iran-statement.html"
-  },
-  {
-    "title": "Why Recognising a Palestinian State Now Is a Mistake",
-    "date": "2026-01-08",
-    "excerpt": "An argument against recognition under current conditions, focused on security, legitimacy, and incentives.",
-    "file": "2026-01-14-labour-palestinian-recognition.html"
-  },
-  {
-    "title": "Welcome to The Blue Dispatch",
-    "date": "2026-01-08",
-    "excerpt": "What this site is, what it isn’t, and how dispatches will be written.",
-    "file": "2026-01-08-welcome.html"
-  }
-]
+}
