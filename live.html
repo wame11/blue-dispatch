@@ -128,7 +128,7 @@
       <p class="mt-2 text-gray-600">
         Latest updates on Israel, Iran, USA, and UK.
         <br>
-        <span class="text-xs text-gray-400">Powered by Google News*</span>
+        <span class="text-xs text-gray-400">Powered by X (formerly Twitter)</span>
       </p>
 
       <!-- External Link to X -->
@@ -148,10 +148,9 @@
     </div>
   </main>
 
-  <!-- FOOTER: Updated with 'text-center' to force center alignment -->
   <footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center">
     <div class="max-w-4xl mx-auto px-4">
-      <p class="text-xs text-gray-500 mb-4">* The articles on this page are not checked by The Blue Dispatch</p>
+      <p class="text-xs text-gray-500 mb-4">* The posts on this page are not checked by The Blue Dispatch</p>
       
       <p class="text-gray-600 mb-2">&copy; <span id="current-year"></span> The Blue Dispatch</p>
       
@@ -171,11 +170,11 @@
     async function fetchNews() {
       const container = document.getElementById('news-container');
       
-      const searchQuery = '(Israel OR Iran OR "United States" OR "United Kingdom") -opinion -editorial -commentary';
-      const encodedQuery = encodeURIComponent(searchQuery);
+      // Updated Feed URL
+      const rssUrl = 'https://rss.app/feeds/gQBuXLYzYabf6qLw.xml';
       
-      const googleRssUrl = `https://news.google.com/rss/search?q=${encodedQuery}&hl=en-US&gl=US&ceid=US:en`;
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(googleRssUrl)}`;
+      // We still use rss2json to parse the XML feed easily in the browser without CORS issues
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
       try {
         const response = await fetch(apiUrl);
@@ -184,22 +183,20 @@
         if (data.status === 'ok' && data.items.length > 0) {
           container.innerHTML = '';
           
+          // data.items comes pre-sorted from RSS.app usually, but we keep the sort just in case
           data.items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
           
           data.items.forEach(item => {
-            if (item.title.toLowerCase().includes("opinion")) return;
+            // Filter out empty titles if any
+            if (!item.title) return;
 
             const date = new Date(item.pubDate).toLocaleDateString(undefined, {
               weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
             });
 
-            let title = item.title;
-            const sourceMatch = title.match(/(.*) - (.*)$/);
-            let source = "News";
-            if (sourceMatch) {
-              title = sourceMatch[1];
-              source = sourceMatch[2];
-            }
+            // For Twitter RSS feeds, the author is usually the handle
+            const source = item.author || "X Update";
+            const title = item.title;
 
             const article = document.createElement('div');
             article.className = 'news-item';
@@ -214,13 +211,13 @@
             container.appendChild(article);
           });
         } else {
-          container.innerHTML = '<div class="p-8 text-center text-red-600">No news found or feed temporarily unavailable.</div>';
+          container.innerHTML = '<div class="p-8 text-center text-red-600">No updates found or feed temporarily unavailable.</div>';
         }
       } catch (error) {
         console.error('Error fetching news:', error);
         container.innerHTML = `
           <div class="p-8 text-center">
-            <p class="text-red-600 font-bold mb-2">Unable to load news feed.</p>
+            <p class="text-red-600 font-bold mb-2">Unable to load feed.</p>
             <p class="text-gray-500 text-sm">This might be due to a network restriction or the API service.</p>
           </div>
         `;
