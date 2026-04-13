@@ -128,15 +128,15 @@
       <p class="mt-2 text-gray-600">
         Latest updates on Israel, Iran, USA, and UK.
         <br>
-        <span class="text-xs text-gray-400">Powered by X (formerly Twitter)</span>
+        <span class="text-xs text-gray-400">Powered by Open Source Intel</span>
       </p>
 
-      <!-- External Link to X -->
-      <a href="https://x.com/osint613" target="_blank" rel="noopener noreferrer" class="x-button">
+      <!-- External Link to OSINT613 -->
+      <a href="https://www.osint613.com" target="_blank" rel="noopener noreferrer" class="x-button">
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
         </svg>
-        View @osint613 on X
+        View OSINT613
       </a>
     </div>
 
@@ -170,10 +170,10 @@
     async function fetchNews() {
       const container = document.getElementById('news-container');
       
-      // Updated Feed URL
-      const rssUrl = 'https://rss.app/feeds/gQBuXLYzYabf6qLw.xml';
+      // Direct RSS feed from OSINT613
+      const rssUrl = 'https://www.osint613.com/feed';
       
-      // We still use rss2json to parse the XML feed easily in the browser without CORS issues
+      // Use rss2json to parse the XML feed easily in the browser without CORS issues
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
       try {
@@ -183,7 +183,7 @@
         if (data.status === 'ok' && data.items.length > 0) {
           container.innerHTML = '';
           
-          // data.items comes pre-sorted from RSS.app usually, but we keep the sort just in case
+          // data.items comes pre-sorted from RSS feed, but we keep the sort just in case
           data.items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
           
           data.items.forEach(item => {
@@ -194,15 +194,15 @@
               weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
             });
 
-            // For Twitter RSS feeds, the author is usually the handle
-            const source = item.author || "X Update";
+            // Extract category from the item
+            const category = item.categories && item.categories.length > 0 ? item.categories[0] : "Update";
             const title = item.title;
 
             const article = document.createElement('div');
             article.className = 'news-item';
             article.innerHTML = `
               <div class="news-meta">
-                <span class="text-blue-700">${source}</span> &bull; ${date}
+                <span class="text-blue-700">${category}</span> &bull; ${date}
               </div>
               <a href="${item.link}" target="_blank" class="news-title">
                 ${title}
